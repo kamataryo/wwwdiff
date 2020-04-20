@@ -4,7 +4,7 @@
     "puppeteer": "^3.0.0"
   },
   "name": "wwwdiff",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "bin": "cli.js",
   "main": "index.js",
   "repository": "git@github.com:kamataryo/wwwdiff.git",
