@@ -12,5 +12,5 @@ $ wwwdiff https://example.com/a https://examle.com/b > ./sample.png
 ## Sample
 
 ```shell
-$ npx wwwdiff https://kamataryo.github.io/sample-a.html https://kamataryo.github.io/sample-b.html > ./sample.png
+$ npx wwwdiff https://kamataryo.github.io/wwwdiff/sample-a.html https://kamataryo.github.io/wwwdiff/sample-a.html > ./sample.png
 ```
