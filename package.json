@@ -18,7 +18,7 @@
     "w3diff": "cli.js"
   },
   "scripts": {
-    "postpublish": "./bin/alias.sh && cd alias-package && npm publish"
+    "postpublish": "sh ./bin/alias.sh && cd alias-package && npm publish"
   },
   "main": "index.js",
   "repository": "git@github.com:kamataryo/w3diff.git",
