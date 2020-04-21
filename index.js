@@ -1,12 +1,18 @@
 const puppeteer = require("puppeteer");
 const looksSame = require("looks-same");
 
-const generateDiff = (screenshot1, screenshot2, options) => {
+/**
+ *
+ * @param {Buffer}          reference  Referred image buffer
+ * @param {Buffer}          current    Current image buffer
+ * @param {Promise<Buffer>} options    Diff image buffer
+ */
+const generateDiff = (reference, current, options) => {
   return new Promise((resolve, reject) => {
     looksSame.createDiff(
       {
-        reference: screenshot1,
-        current: screenshot2,
+        reference,
+        current,
         highlightColor: options.color || "#ff00ff",
       },
       (error, screenDiff) => {
@@ -22,6 +28,10 @@ const generateDiff = (screenshot1, screenshot2, options) => {
   });
 };
 
+/**
+ *
+ * @param {string} url Target url for screenshot
+ */
 const url2screenshot = async (url) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -31,6 +41,12 @@ const url2screenshot = async (url) => {
   return screenshot;
 };
 
+/**
+ *
+ * @param {string}  url1 referenced url
+ * @param {string}  url2 current url
+ * @param {options} options
+ */
 module.exports = async (url1, url2, options) => {
   const [screenshot1, screenshot2] = await Promise.all([
     url2screenshot(url1),

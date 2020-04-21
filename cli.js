@@ -1,17 +1,14 @@
 #!/usr/bin/env node
 const meow = require("meow");
-const wwwDiff = require("./index");
+const w3Diff = require("./index");
 
 const [, , url1, url2] = process.argv;
 
 const cli = meow(
-  `
-	Usage
-	  $ wwwdiff https://example.com/a https://example.com/b > example.png
-
-	Options
-	  --color, -c Diff hightlighting color
-`,
+  `Usage
+    $ w3diff https://example.com/a https://example.com/b > example.png
+Options
+  --color, -c <color> hightlighting color. The default is #ff00ff.`,
   {
     flags: {
       color: {
@@ -33,7 +30,7 @@ const main = async () => {
     cli.showVersion();
   } else {
     try {
-      const diff = await wwwDiff(url1, url2, options);
+      const diff = await w3Diff(url1, url2, options);
       process.stdout.write(diff);
       process.exit(0);
     } catch (error) {
