@@ -11,8 +11,8 @@ $ wwwdiff https://example.com/a https://examle.com/b > ./sample.png
 
 ## options
 
-````shell
-$ ./cli.js -h
+```shell
+$ wwwdiff -h
 
   a simple CLI to create diff image from two web pages
 
@@ -29,6 +29,6 @@ The diff between [sample-a](https://kamataryo.github.io/wwwdiff/sample-a.html) a
 
 ```shell
 $ npx wwwdiff https://kamataryo.github.io/wwwdiff/sample-a.html https://kamataryo.github.io/wwwdiff/sample-b.html > ./sample.png
-````
+```
 
 ![diff sample](./sample.png)
