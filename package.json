@@ -4,6 +4,7 @@
     "puppeteer": "^3.0.0"
   },
   "name": "wwwdiff",
+  "description": "a simple CLI to create diff image from two web pages",
   "version": "1.0.2",
   "bin": "cli.js",
   "main": "index.js",

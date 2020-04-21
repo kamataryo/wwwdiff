@@ -1,34 +1,45 @@
 const puppeteer = require("puppeteer");
 const looksSame = require("looks-same");
 
-module.exports = async (URL_A, URL_B) => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-
-  // check if both url can be navigated at first
-  await page.goto(URL_A);
-  await page.goto(URL_B);
-
-  await page.goto(URL_A);
-  const buffA = await page.screenshot({ fullPage: true });
-  await page.goto(URL_B);
-  const buffB = await page.screenshot({ fullPage: true });
-  await browser.close();
-
-  return await new Promise((resolve, reject) =>
+const generateDiff = (screenshot1, screenshot2) => {
+  return new Promise((resolve, reject) => {
     looksSame.createDiff(
       {
-        reference: buffA,
-        current: buffB,
+        reference: screenshot1,
+        current: screenshot2,
         highlightColor: "#ff00ff",
       },
-      (error, buffer) => {
+      (error, screenDiff) => {
         if (error) {
           reject(error);
         } else {
-          resolve(buffer);
+          resolve(screenDiff);
         }
       }
-    )
-  );
+    );
+  });
+};
+
+module.exports = async (url1, url2) => {
+  const [browser1, browser2] = await Promise.all([
+    puppeteer.launch(),
+    puppeteer.launch(),
+  ]);
+
+  const [page1, page2] = await Promise.all([
+    browser1.newPage(),
+    browser2.newPage(),
+  ]);
+
+  const [screenshot1, screenshot2] = await Promise.all([
+    page1.goto(url1).then(() => page1.screenshot({ fullPage: true })),
+    page2.goto(url2).then(() => page2.screenshot({ fullPage: true })),
+  ]);
+
+  const [, , screenDiff] = await Promise.all([
+    browser1.close(),
+    browser2.close(),
+    generateDiff(screenshot1, screenshot2),
+  ]);
+  return screenDiff;
 };
