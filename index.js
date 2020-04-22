@@ -52,5 +52,13 @@ module.exports = async (url1, url2, options) => {
     url2screenshot(url1),
     url2screenshot(url2),
   ]);
-  return await generateDiff(screenshot1, screenshot2, options);
+  // debugging hidden options
+  if (options.reference) {
+    return screenshot1;
+  } else if (options.current) {
+    return screenshot2;
+  } else {
+    const diffOption = { color: options.color };
+    return await generateDiff(screenshot1, screenshot2, diffOption);
+  }
 };

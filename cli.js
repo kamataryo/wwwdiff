@@ -2,11 +2,9 @@
 const meow = require("meow");
 const w3Diff = require("./index");
 
-const [, , url1, url2] = process.argv;
-
 const cli = meow(
   `Usage
-    $ w3diff https://example.com/a https://example.com/b > example.png
+    $ wwwdiff https://example.com/a https://example.com/b > example.png
 Options
   --color, -c <color> hightlighting color. The default is #ff00ff.`,
   {
@@ -15,6 +13,14 @@ Options
         type: "string",
         alias: "c",
         default: "#ff00ff",
+      },
+      reference: {
+        type: "boolean",
+        default: false,
+      },
+      current: {
+        type: "boolean",
+        default: false,
       },
     },
   }
