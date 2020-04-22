@@ -24,22 +24,11 @@ $ wwwdiff -h
 
 ## Sample
 
-<style>img { border: 1px solid black; }</style>
-
 See the diff between [sample A](https://kamataryo.github.io/wwwdiff/sample-a.html) and [sample B](https://kamataryo.github.io/wwwdiff/sample-b.html).
 
 ```shell
 $ npx wwwdiff https://kamataryo.github.io/wwwdiff/sample-a.html https://kamataryo.github.io/wwwdiff/sample-b.html > ./sample.png
 ```
-
-### sample A
-
-![sample a](./sample-a.png)
-
-### sample A
-
-![sample b](./sample-b.png)
-
-### The diff
-
-![diff sample](./sample.png)
+| Sample A                    | Sample B                    | Diff                        |
+| :-------------------------- | :-------------------------- |:--------------------------- |
+| ![sample a](./sample-a.png) | ![sample b](./sample-b.png) | ![diff sample](./sample.png)|
