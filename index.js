@@ -3,22 +3,23 @@ const looksSame = require("looks-same");
 
 /**
  *
- * @param {Buffer}          reference  Referred image buffer
- * @param {Buffer}          current    Current image buffer
- * @param {Promise<Buffer>} options    Diff image buffer
+ * @param  {Buffer}          reference Referred image buffer
+ * @param  {Buffer}          current   Current image buffer
+ * @param  {string}          color     diff highlight color
+ * @return {Promise<Buffer>} Diff image buffer
  */
-const generateDiff = (reference, current, options) => {
+const generateDiff = (reference, current, color) => {
   return new Promise((resolve, reject) => {
     looksSame.createDiff(
       {
         reference,
         current,
-        highlightColor: options.color || "#ff00ff",
+        highlightColor: color,
       },
       (error, screenDiff) => {
         if (error) {
           reject(
-            `Diff generation error. Perhaps the color "${options.color}" is invalid.`
+            `Diff generation error. Perhaps the specified color "${color}" is invalid.`
           );
         } else {
           resolve(screenDiff);
@@ -30,9 +31,10 @@ const generateDiff = (reference, current, options) => {
 
 /**
  *
- * @param {string} url Target url for screenshot
+ * @param  {string}  url Target url for screenshot
+ * @return {buffer} screenshot image buffer
  */
-const url2screenshot = async (url) => {
+const screenshot = async (url) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(url);
@@ -43,22 +45,25 @@ const url2screenshot = async (url) => {
 
 /**
  *
- * @param {string}  url1 referenced url
- * @param {string}  url2 current url
- * @param {options} options
+ * @param {string}  referenceUrl referenced url
+ * @param {string}  currentUrl   current url
+ * @param {options} options      { color: string, reference?: bool, current?: bool }
+ * @return {buffer} diff image buffer
  */
-module.exports = async (url1, url2, options) => {
-  const [screenshot1, screenshot2] = await Promise.all([
-    url2screenshot(url1),
-    url2screenshot(url2),
+const lib = async (referenceUrl, currentUrl, options) => {
+  const [referenceImage, currentImage] = await Promise.all([
+    screenshot(referenceUrl),
+    screenshot(currentUrl),
   ]);
-  // debugging hidden options
+
+  // `reference` and `current` is hidden options for debugging
   if (options.reference) {
-    return screenshot1;
+    return referenceImage;
   } else if (options.current) {
-    return screenshot2;
+    return currentImage;
   } else {
-    const diffOption = { color: options.color };
-    return await generateDiff(screenshot1, screenshot2, diffOption);
+    return await generateDiff(referenceImage, currentImage, options.color);
   }
 };
+
+module.exports = lib;

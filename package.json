@@ -17,5 +17,8 @@
   "main": "index.js",
   "repository": "git@github.com:kamataryo/wwwdiff.git",
   "author": "kamataryo <mugil.cephalus@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "node test.js"
+  }
 }
