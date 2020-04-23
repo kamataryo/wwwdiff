@@ -5,8 +5,8 @@ name: Node.js Package
 
 on:
   push:
-    branches: 
-      - master
+    tags: 
+      - "*"
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 10
-      - run: npm ci
+      - run: yarn ci
       - run: npm test
 
   publish-npm:
@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: 10
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
+      - run: yarn ci
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
