@@ -1,5 +1,7 @@
 # wwwdiff
 
+![](https://github.com/kamataryo/wwwdiff/workflows/npmpublish/badge.svg)
+
 wwwdiff is a simple CLI tool to make a diff image between 2 web pages.
 
 ## Prerequisite
