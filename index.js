@@ -45,22 +45,19 @@ const screenshot = async (url) => {
 
 /**
  *
- * @param {string}  referenceUrl referenced url
- * @param {string}  currentUrl   current url
+ * @param {string}   referenceUrl referenced url
+ * @param {string?}  currentUrl   current url
  * @param {options} options      { color: string, reference?: bool, current?: bool }
  * @return {buffer} diff image buffer
  */
 const lib = async (referenceUrl, currentUrl, options) => {
   const [referenceImage, currentImage] = await Promise.all([
-    screenshot(referenceUrl),
-    screenshot(currentUrl),
+    referenceUrl && screenshot(referenceUrl),
+    currentUrl && screenshot(currentUrl),
   ]);
 
-  // `reference` and `current` is hidden options for debugging
-  if (options.reference) {
+  if (!currentUrl) {
     return referenceImage;
-  } else if (options.current) {
-    return currentImage;
   } else {
     return await generateDiff(referenceImage, currentImage, options.color);
   }
