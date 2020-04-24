@@ -1,6 +1,6 @@
 {
   "name": "wwwdiff",
-  "version": "1.1.10",
+  "version": "1.2.0",
   "description": "A simple CLI tool to make a diff image between 2 web pages",
   "dependencies": {
     "looks-same": "^7.2.2",
