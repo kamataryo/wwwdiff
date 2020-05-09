@@ -17,11 +17,7 @@ $ wwwdiff https://example.com/a https://examle.com/b > ./sample.png
 
 ## Example
 
-See the diff between [sample A](https://kamataryo.github.io/wwwdiff/sample-a.html) and [sample B](https://kamataryo.github.io/wwwdiff/sample-b.html).
-
-```shell
-$ npx wwwdiff https://kamataryo.github.io/wwwdiff/sample-a.html https://kamataryo.github.io/wwwdiff/sample-b.html > ./sample-diff.png
-```
+Example with 2 WordPress posts.
 
 | Sample A                    | Sample B                    | Diff                              |
 | :-------------------------- | :-------------------------- | :-------------------------------- |
