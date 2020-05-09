@@ -34,13 +34,14 @@ Example with 2 WordPress posts.
 ```shell
 $ wwwdiff -h
 
-  A simple CLI tool to make a diff image between 2 web pages
+  wwwdiff is a simple CLI tool to make a diff image between 2 web pages.
 
   Usage
-      $ wwwdiff https://example.com/a https://example.com/b > example.png
+    $ wwwdiff https://example.com/a https://example.com/b > example.png
   Options
     --color, -c <color>       hightlighting color. The default is #ff00ff.
     --delay, -d <millisecond> duration until shot. The default value is 0.
+    --verbose                 shows debug messages.
 ```
 
 You can simply take single screenshot with one URL argument.

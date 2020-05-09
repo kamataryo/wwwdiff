@@ -7,7 +7,9 @@ const cli = meow(
     $ wwwdiff https://example.com/a https://example.com/b > example.png
 Options
   --color, -c <color>       hightlighting color. The default is #ff00ff.
-  --delay, -d <millisecond> duration until shot. The default value is 0.`,
+  --delay, -d <millisecond> duration until shot. The default value is 0.
+  --verbose                 shows debug messages.
+`,
   {
     flags: {
       color: {
@@ -19,6 +21,10 @@ Options
         type: "number",
         alias: "d",
         default: 0,
+      },
+      verbose: {
+        type: "boolean",
+        default: false,
       },
       reference: {
         type: "boolean",
