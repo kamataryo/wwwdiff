@@ -31,7 +31,7 @@ const debugSummary = () => {
   const min = Math.min(...eventTimes);
   const max = Math.max(...eventTimes);
   process.stderr.write(
-    `SUMMARY: (${max - min}ms) for ${eventTimes.length / 2} events.`
+    `SUMMARY: (${max - min}ms) for ${eventTimes.length / 2} events.\n`
   );
 };
 

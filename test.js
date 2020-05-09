@@ -6,20 +6,21 @@ const urlA = "https://kamataryo.github.io/wwwdiff/sample-a.html";
 const urlB = "https://kamataryo.github.io/wwwdiff/sample-b.html";
 
 const main = async () => {
-  let diff, snapshot;
+  let snapshot;
+  const options = { color: "#ff00ff", verbose: true };
   try {
-    process.stdout.write("diff\n");
-    diff = await w3Diff(urlA, urlB, { color: "#ff00ff" });
+    process.stdout.write("\ntest for diff\n");
+    const diff = await w3Diff(urlA, urlB, options);
     snapshot = await fs.readFile("./__test__/sample-diff.png");
     assert.deepEqual(diff, snapshot);
 
-    process.stdout.write("sample a\n");
-    const sampleA = await w3Diff(urlA, void 0, { color: "#ff00ff" });
+    process.stdout.write("\ntest for sample a\n");
+    const sampleA = await w3Diff(urlA, void 0, options);
     snapshot = await fs.readFile("./__test__/sample-a.png");
     assert.deepEqual(sampleA, snapshot);
 
-    process.stdout.write("sample b\n");
-    const sampleB = await w3Diff(urlB, void 0, { color: "#ff00ff" });
+    process.stdout.write("\n test for sample b\n");
+    const sampleB = await w3Diff(urlB, void 0, options);
     snapshot = await fs.readFile("./__test__/sample-b.png");
     assert.deepEqual(sampleB, snapshot);
   } catch (error) {
