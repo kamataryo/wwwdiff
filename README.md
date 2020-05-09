@@ -6,13 +6,19 @@ wwwdiff is a simple CLI tool to make a diff image between 2 web pages.
 
 ## Prerequisite
 
-- Node.js 10.x
+- Node.js > 10
 
 ## Usage
 
 ```shell
 $ npm install -g wwwdiff
-$ wwwdiff https://example.com/a https://examle.com/b > ./sample.png
+$ wwwdiff https://example.com/a https://examle.com/b > sample.png
+```
+
+Or you can use `wwwdfiff` via `npx`, perhaps it downloads Chromium browser (120MB) for every time.
+
+```shell
+$ npx wwwdiff https://example.com/a https://examle.com/b > sample.png
 ```
 
 ## Example
@@ -25,8 +31,6 @@ Example with 2 WordPress posts.
 
 ## options
 
-You can alter hightlighting color option with `--color` or `-c`.
-
 ```shell
 $ wwwdiff -h
 
@@ -35,7 +39,8 @@ $ wwwdiff -h
   Usage
       $ wwwdiff https://example.com/a https://example.com/b > example.png
   Options
-    --color, -c <color> hightlighting color. The default is #ff00ff.
+    --color, -c <color>       hightlighting color. The default is #ff00ff.
+    --delay, -d <millisecond> duration until shot. The default value is 0.
 ```
 
 You can simply take single screenshot with one URL argument.
