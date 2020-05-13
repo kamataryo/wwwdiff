@@ -8,6 +8,7 @@ const cli = meow(
 Options
   --color, -c <color>       hightlighting color. The default is #ff00ff.
   --delay, -d <millisecond> duration until shot. The default value is 0.
+  --width, -w <width>       iewport width.
   --verbose                 shows debug messages.
 `,
   {
@@ -21,6 +22,10 @@ Options
         type: "number",
         alias: "d",
         default: 0,
+      },
+      width: {
+        type: "number",
+        alias: "w",
       },
       verbose: {
         type: "boolean",
@@ -52,10 +57,7 @@ const main = async () => {
       process.stdout.write(diff);
       process.exit(0);
     } catch (error) {
-      process.stderr.write(
-        typeof error === "string" ? error + "\n" : JSON.stringify(error)
-      );
-      process.exit(1);
+      throw error;
     }
   }
 };

@@ -23,6 +23,14 @@ const main = async () => {
     const sampleB = await w3Diff(urlB, void 0, options);
     snapshot = await fs.readFile("./__test__/sample-b.png");
     assert.deepEqual(sampleB, snapshot);
+
+    process.stdout.write("\ntest for width option\n");
+    const sampleA_w1000 = await w3Diff(urlA, void 0, {
+      ...options,
+      width: 1000,
+    });
+    snapshot = await fs.readFile("./__test__/sample-a-w1000.png");
+    assert.deepEqual(sampleA_w1000, snapshot);
   } catch (error) {
     process.stderr.write(error);
     process.exit(1);

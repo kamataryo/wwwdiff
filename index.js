@@ -72,13 +72,14 @@ const sleep = (duration) =>
 /**
  *
  * @param  {string}  url Target url for screenshot
- * @param  {{duration: number, verbose: boolean }} options
+ * @param  {{duration: number, verbose: boolean, width?: number }} options
  * @return {buffer} screenshot image buffer
  */
 const screenshot = async (url, options) => {
-  const { delay } = options;
+  const { delay, width } = options;
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  width !== void 0 && (await page.setViewport({ width, height: 1 }));
   await page.goto(url);
   await sleep(delay);
   const screenshot = await page.screenshot({ fullPage: true });
@@ -90,17 +91,19 @@ const screenshot = async (url, options) => {
  *
  * @param {string}   referenceUrl referenced url
  * @param {string?}  currentUrl   current url
- * @param {object}   options      { color: string, duration: number, verbose?: bool, reference?: bool, current?: bool }
+ * @param {object}   options      { color: string, duration: number, width?: number, verbose?: bool, reference?: bool, current?: bool }
  * @return {buffer} diff image buffer
  */
-const lib = async (referenceUrl, currentUrl, options) => {
+const w3diff = async (referenceUrl, currentUrl, options) => {
   const delay = Math.max(0, options.delay || 0);
+  const width =
+    typeof options.width === "number" ? Math.max(1, options.width) : void 0;
   const verbose = !!options.verbose;
 
   verbose && debugStart(`Taking screenshot(s) URL.`, 1);
   const [referenceImage, currentImage] = await Promise.all([
-    referenceUrl && screenshot(referenceUrl, { delay }),
-    currentUrl && screenshot(currentUrl, { delay }),
+    referenceUrl && screenshot(referenceUrl, { delay, width }),
+    currentUrl && screenshot(currentUrl, { delay, width }),
   ]);
   verbose && debugEnd(1);
 
@@ -120,4 +123,4 @@ const lib = async (referenceUrl, currentUrl, options) => {
   return output;
 };
 
-module.exports = lib;
+module.exports = w3diff;
