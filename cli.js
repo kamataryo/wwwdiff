@@ -8,7 +8,7 @@ const cli = meow(
 Options
   --color, -c <color>       hightlighting color. The default is #ff00ff.
   --delay, -d <millisecond> duration until shot. The default value is 0.
-  --width, -w <width>       iewport width.
+  --width, -w <width>       viewport width.
   --verbose                 shows debug messages.
 `,
   {
