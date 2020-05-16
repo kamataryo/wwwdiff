@@ -48,8 +48,31 @@ $ wwwdiff -h
 
 ### Tips
 
-You can simply take single screenshot with one URL argument.
+You can take a single screenshot with one URL argument.
 
 ```shell
 $ wwwdiff https://example.com/a > example.png
+```
+
+### Examples with options
+
+```shell
+# Wait 10 seconds before taking screenshots.
+$ wwwdiff --delay 10000 https://example.com/a https://example.com/b > diff.png
+```
+
+```shell
+# Specify output file with option, not using stdout.
+$ wwwdiff https://example.com/a https://example.com/b --output diff.png
+```
+
+```shell
+# Use specified width for viewport..
+$ wwwdiff --width 680 https://example.com/a https://example.com/b > diff.png
+$ wwwdiff --width 2048 https://example.com/a https://example.com/b > diff.png
+```
+
+```shell
+# show debug infomation.
+$ wwwdiff --verbose https://example.com/a https://example.com/b > diff.png
 ```
