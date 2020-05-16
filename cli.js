@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 const meow = require("meow");
 const w3Diff = require("./index");
+const fs = require('fs').promises
 
 const cli = meow(
   `Usage
-    $ wwwdiff https://example.com/a https://example.com/b > example.png
+    $ wwwdiff https://example.com/a https://example.com/b > diff.png
 Options
   --color, -c <color>       hightlighting color. The default is #ff00ff.
   --delay, -d <millisecond> duration until shot. The default value is 0.
+  --output, -o <file path>  Use specified file path as output, not sdtout.
   --width, -w <width>       viewport width.
   --verbose                 shows debug messages.
 `,
@@ -22,6 +24,10 @@ Options
         type: "number",
         alias: "d",
         default: 0,
+      },
+      output: {
+          type: "string",
+          alias: "o",
       },
       width: {
         type: "number",
@@ -54,10 +60,19 @@ const main = async () => {
   } else {
     try {
       const diff = await w3Diff(url1, url2, options);
-      process.stdout.write(diff);
+      if(options.output) {
+        await fs.writeFile(options.output, diff);
+      } else {
+        process.stdout.write(diff);
+      }
       process.exit(0);
     } catch (error) {
-      throw error;
+      if(error && typeof error.toString === 'function') {
+        process.stderr.write(error.toString())
+      } else {
+        process.stderr.write(error)
+      }
+      process.exit(1)
     }
   }
 };

@@ -37,13 +37,16 @@ $ wwwdiff -h
   wwwdiff is a simple CLI tool to make a diff image between 2 web pages.
 
   Usage
-    $ wwwdiff https://example.com/a https://example.com/b > example.png
+    $ wwwdiff https://example.com/a https://example.com/b > diff.png
   Options
     --color, -c <color>       hightlighting color. The default is #ff00ff.
     --delay, -d <millisecond> duration until shot. The default value is 0.
+    --output, -o <file path>  Use specified file path as output, not sdtout.
     --width, -w <width>       viewport width.
     --verbose                 shows debug messages.
 ```
+
+### Tips
 
 You can simply take single screenshot with one URL argument.
 
